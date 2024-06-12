@@ -230,3 +230,10 @@ header .logo
 {
   z-index: 10000000000;
 }
+
+.nav-link
+{
+  letter-spacing: 5px;
+  font-size: medium;
+  font-weight: bold;
+}

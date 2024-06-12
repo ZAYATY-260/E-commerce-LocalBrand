@@ -11,6 +11,10 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+router.get('/tracking', (req, res) => {
+    res.render('tracking');
+});
+
 
 module.exports = router;
 

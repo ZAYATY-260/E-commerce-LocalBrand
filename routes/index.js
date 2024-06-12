@@ -19,6 +19,10 @@ router.get('/tracking', (req, res) => {
     res.render('tracking');
 });
 
+router.get('/confirmTracking', (req, res) => {
+    res.render('confirmTracking');
+});
+
 
 module.exports = router;
 

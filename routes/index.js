@@ -7,6 +7,9 @@ const router = express.Router();
 
 router.get('/', visitorMiddleware);
 
+router.get('/contact', (req, res) => {
+    res.render('contact');
+});
 
 
 module.exports = router;

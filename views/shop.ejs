@@ -5,30 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video Background Website</title>
   <link rel="stylesheet" href="/style/styles.css">
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
-  rel="stylesheet"
-/>
-
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
 </head>
 <body>
 
-<section class="showcase" style="align-items: normal;">
-
-  <%- include("partials/top_nav") %>
-
+<section class="showcase" style="align-items: flex-start;">
   <video src="/images/CompressedBackground.mp4" muted loop autoplay></video>
+  <div class="content" style="margin-top: 100px;">
+    <%- include("partials/top_nav") %>
+    <div class="container-fluid"  style="margin-top: 200px;">
+      <p class="main-text">Products</p>
+    </div>
+   
+  </div>
 </section>
 
 </body>

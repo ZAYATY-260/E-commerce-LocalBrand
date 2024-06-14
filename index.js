@@ -31,8 +31,10 @@ app.set("view engine", "ejs");
 
 // Routes
 const indexRouter = require("./routes/index");
-app.use("/", indexRouter);
+const adminRouter = require("./routes/admin");
 
+app.use("/", indexRouter);
+app.use("/admin", adminRouter);
 
 // MongoDB connection URI
 const mongoURI =  process.env.dbURI ;

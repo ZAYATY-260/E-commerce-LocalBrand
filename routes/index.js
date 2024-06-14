@@ -1,11 +1,11 @@
 const express = require("express");
-const {visitorMiddleware} = require("../Controllers/visitorMiddleware.js");
+const {get_product_index} = require("../Controllers/productController.js");
 const router = express.Router();
 
 
 
 
-router.get('/', visitorMiddleware);
+router.get('/', get_product_index);
 
 router.get('/shop', (req, res) => {
     res.render('shop');

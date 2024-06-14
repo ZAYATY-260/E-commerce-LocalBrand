@@ -20,6 +20,19 @@
     <%- include("partials/top_nav") %>
     <div class="container-fluid"  style="margin-top: 200px;">
       <p class="main-text">Products</p>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3">
+            <div class="container products p-3 p-lg-5 mt-5"  >
+              <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4"  data-aos="fade-up">
+                <% for(let i = 0 ; i < product_client.length; i++ ){ %>
+                  <%- include("../partials/product-card.ejs", {product: product_client[i]}) %>
+                <%}%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
    
   </div>

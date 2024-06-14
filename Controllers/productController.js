@@ -1,25 +1,23 @@
 const product = require("../models/ProductModel.js");
-const {visitorMiddleware} = require("../models/visitorMiddleware.js");
+const {visitorMiddleware} = require("../Middleware/visitorMiddleware.js");
 
   // Get products by date
  
   // Other controller methods...
 
 
-const get_product_index = async (req, res, next) => {
-  
-//   let cart = new Cart(req.session.cart ? req.session.cart : {});
-
+const get_product_index = async (req, res, next) => 
+{  
+  //   let cart = new Cart(req.session.cart ? req.session.cart : {});
   try {
     const products = await product.find();
     //take the ip address for the user to save in db
-    visitorMiddleware();
-    res.render('Shop', { product_client: products , isEmpty: products.length > 0 ? false : true });
+    visitorMiddleware(req,res,next);
+    res.render('shop', { product_client: products , isEmpty: products.length > 0 ? false : true });
   } catch (err) {
     console.error(err);
     next(err); 
   }
-
 }
 
 // const get_product_for_admin = async (req, res) => {

@@ -4,12 +4,13 @@ const router = express.Router();
 
 
 
-
-router.get('/', get_product_index);
-
-router.get('/shop', (req, res) => {
-    res.render('shop');
+router.get('/', (req, res) => {
+    res.render('index');
 });
+
+router.get('/shop', get_product_index);
+
+
 
 router.get('/contact', (req, res) => {
     res.render('contact');

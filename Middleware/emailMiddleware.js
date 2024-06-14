@@ -277,7 +277,7 @@ const mail_option = {
 
 
                                         <div style="line-height: 26px;">
-                                            <a href="/confirmTracking" style="color: #ffffff; text-decoration: none;">SHOP NOW</a>
+                                            <a href="/confirmTracking" style="color: #ffffff; text-decoration: none;">Verify</a>
                                         </div>
                                     </td>
                                 </tr>

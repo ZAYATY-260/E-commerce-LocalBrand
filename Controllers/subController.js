@@ -1,18 +1,15 @@
-const {mailing} = require("../Middleware/emailMiddleware.js");
+const { mailing } = require("../Middleware/emailMiddleware.js");
 const express = require("express");
-const router = express.Router(); 
+const router = express.Router();
 
-const sendverification = async (req,res,next) => {
-  
-   try {
-    mailing(req);
-    res.redirect("/tracking");
+const sendverification = async (req, res, next) => {
+  try {
+    await mailing(req); // Assuming mailing function is asynchronous
+    res.redirect("/tracking?emailSent=true");
   } catch (err) {
     console.error(err);
-    next(err); 
+    next(err);
   }
-
 };
 
-module.exports = {sendverification};
-
+module.exports = { sendverification };

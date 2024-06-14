@@ -15,6 +15,14 @@ router.get('/forgetpassword', (req, res) => {
     res.render('Admin/Forgetpass');
 });
 
+router.get('/add_product', (req, res) => {
+    res.render('Admin/add_product');
+});
+
+router.get('/view_products', (req, res) => {
+    res.render('Admin/View_products');
+});
+
 module.exports = router;
 
 

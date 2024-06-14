@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Background Website</title>
+  <title>Shop</title>
   <link rel="stylesheet" href="/css/styles.css">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -11,21 +11,33 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
   <!-- MDB -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
+  
+  <style>
+    .back-button {
+      position: absolute;
+      top: 10px; /* Adjust this value as needed */
+      left: 10px; /* Adjust this value as needed */
+      z-index: 1000; /* Ensure it's above other content */
+    }
+  </style>
 </head>
 <body>
+
+<div class="back-button">
+  <a href="javascript:history.back()" style="color: brown;"><i class="fas fa-arrow-left" style="color: brown;"></i> Back</a>
+</div>
 
 <section class="showcase" style="align-items: flex-start;">
   <video src="/website_images/CompressedBackground.mp4" muted loop autoplay></video>
   <div class="content" style="margin-top: 100px;">
     <%- include("partials/top_nav") %>
-    <div class="container-fluid"  style="margin-top: 200px;">
+    <div class="container-fluid" style="margin-top: 200px;">
       <p class="main-text">Products</p>
       <div class="container-fluid">
         <div class="row">
           <div class="col-3">
-            <div class="container products p-3 p-lg-5 mt-5"  >
-              <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4"  data-aos="fade-up">
-        
+            <div class="container products p-3 p-lg-5 mt-5">
+              <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" data-aos="fade-up">
                 <% for(let i = 0 ; i < product_client.length; i++ ){ %>
                   <%- include("../partials/product_card.ejs", {product: product_client[i]}) %>
                 <%}%>
@@ -35,7 +47,6 @@
         </div>
       </div>
     </div>
-   
   </div>
 </section>
 

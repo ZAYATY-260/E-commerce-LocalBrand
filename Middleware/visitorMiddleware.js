@@ -17,10 +17,10 @@ const ensureDirectoryExists = async (filePath) => {
 const readLogsFromFile = async (logFile) => {
     try {
         const data = await fs.readFile(logFile, 'utf8');
-        return JSON.parse(data) || [];
+        return JSON.parse(data);
     } catch (err) {
         if (err.code === 'ENOENT') {
-            return [];
+            return { logs: [], totalCount: 0 };
         }
         throw err;
     }
@@ -37,7 +37,15 @@ const logVisitor = async (req) => {
     try {
         await ensureDirectoryExists(logFile);
 
-        let logs = await readLogsFromFile(logFile);
+        let { logs, totalCount } = await readLogsFromFile(logFile);
+
+        // Initialize logs and totalCount if they are not parsed correctly or empty
+        if (!Array.isArray(logs)) {
+            logs = [];
+        }
+        if (typeof totalCount !== 'number') {
+            totalCount = 0;
+        }
 
         let visitor = logs.find(log => log.ipAddress === ipAddress);
 
@@ -48,7 +56,11 @@ const logVisitor = async (req) => {
             visitor.count += 1;
         }
 
-        await writeLogsToFile(logFile, logs);
+        // Update total count
+        totalCount += 1;
+
+        // Save the updated logs and total count to the file
+        await writeLogsToFile(logFile, { logs, totalCount });
     } catch (err) {
         console.error("Error updating visitor count:", err);
         throw err; // Throw error to be caught by the caller

@@ -17,9 +17,18 @@
         .notification {
             display: none;
         }
+        .back-button {
+    position: absolute;
+    top: 10px; /* Adjust this value as needed */
+    left: 10px; /* Adjust this value as needed */
+    z-index: 1000; /* Ensure it's above other content */
+  }
     </style>
 </head>
 <body>
+    <div class="back-button">
+        <a href="javascript:history.back()" style="color: brown;"><i class="fas fa-arrow-left" style="color: brown;"></i> Back</a>
+      </div>
     <video autoplay muted loop>
         <source src="/website_images/CompressedBackground.mp4" type="video/mp4">
         Your browser does not support the video tag.
@@ -63,7 +72,6 @@
         </div>
        
     </div>
-    <a class="btn btn-secondary btn-lg col-md-2 col-sm-2" type="submit" style="margin-left: 80%; background-color: brown; color: aliceblue;" href="/" >Back</a>
     <script>
         // Function to check for query parameter in URL
         function getQueryParam(param) {

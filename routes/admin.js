@@ -23,6 +23,10 @@ router.get('/view_products', (req, res) => {
     res.render('Admin/View_products');
 });
 
+router.get('/utilities', (req, res) => {
+    res.render('Admin/utilities');
+});
+
 module.exports = router;
 
 

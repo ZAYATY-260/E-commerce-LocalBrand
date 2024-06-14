@@ -1,0 +1,358 @@
+                                
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard 4</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="../css/font-face.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="../vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="../vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="../vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="../vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="../css/theme.css" rel="stylesheet" media="all">
+
+</head>
+<script>
+
+
+    function close_btn(name)
+    {
+        if(name == undefined)
+        {
+            
+        }
+        else if(name == "category")
+        {
+            document.getElementById("category").classList.add("d-none");
+            document.getElementById("category").classList.remove("d-block");
+
+            document.getElementById("category_button_close").classList.add("d-none");
+            document.getElementById("category_button_close").classList.remove("d-block");
+
+            document.getElementById("category_button_open").classList.remove("d-none");
+            document.getElementById("category_button_open").classList.add("d-block");
+        }
+        else if(name == "size")
+        {
+            document.getElementById("size").classList.add("d-none");
+            document.getElementById("size").classList.remove("d-block");
+
+            document.getElementById("size_button_close").classList.add("d-none");
+            document.getElementById("size_button_close").classList.remove("d-block");
+
+            document.getElementById("size_button_open").classList.remove("d-none");
+            document.getElementById("size_button_open").classList.add("d-block");
+        }
+    }
+
+
+    function show_btn(name)
+    {
+        if(name == undefined)
+        {
+            
+        }
+        else if(name == "category")
+        {
+            document.getElementById("category").classList.remove("d-none");
+            document.getElementById("category").classList.add("d-block");
+
+            document.getElementById("category_button_close").classList.remove("d-none");
+            document.getElementById("category_button_close").classList.add("d-block");
+
+            document.getElementById("category_button_open").classList.add("d-none");
+            document.getElementById("category_button_open").classList.remove("d-block");
+        }
+        else if(name == "size")
+        {
+            document.getElementById("size").classList.remove("d-none");
+            document.getElementById("size").classList.add("d-block");
+
+            document.getElementById("size_button_close").classList.remove("d-none");
+            document.getElementById("size_button_close").classList.add("d-block");
+
+            document.getElementById("size_button_open").classList.add("d-none");
+            document.getElementById("size_button_open").classList.remove("d-block");
+        }
+    }
+
+
+
+</script>
+<body class="animsition">
+    <div class="page-wrapper">
+        <%- include("partials/admin_header") %>
+
+        <%- include("partials/welcome_frag") %>
+
+        <!-- PAGE CONTENT-->
+        <div class="page-container3">
+            <section class="alert-wrap p-t-70 p-b-70">
+                <div class="container">
+                    <!-- ALERT-->
+                    <div class="alert au-alert-success alert-dismissible fade show au-alert au-alert--70per" role="alert">
+                        <i class="zmdi zmdi-check-circle"></i>
+                        <span class="content">You successfully read this important alert message.</span>
+                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">
+                                <i class="zmdi zmdi-close-circle"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <!-- END ALERT-->
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <div class="row">
+
+                        <%- include("partials/admin_sidenav") %>
+
+                        <div class="col-xl-9">
+                            <!-- PAGE CONTENT-->
+                            <div class="page-content">
+                                <div class="row m-t-30">
+                                    <div class="col-md-6">
+                                        <!-- DATA TABLE-->
+                                        <div class="top-campaign">
+                                        
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <h3 class="title-3 m-b-30">Categories</h3>
+                                                    </div>
+                                                    <div class="col-6 d-flex justify-content-end">
+                                                        <button class="btn btn-primary h-75" id="category_button_open" onclick="show_btn('category')">Add New</button>
+                                                        <button class="btn btn-warning h-75 d-none" id="category_button_close" onclick="close_btn('category')">close</button>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5 d-none" id="category">
+                                                    <div class="col-12">
+                                                        <div class="row form-group mb-5">
+                                                            <div class="col col-md-3">
+                                                                <label for="text-input" class=" form-control-label">Category Name</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <input type="text" id="text-input" name="text-input" placeholder="Name" class="form-control">
+                                                                <small class="form-text text-muted"></small>
+                                                            </div>
+                                                            <button type="button" class="btn btn-outline-success w-100">
+                                                                <i class="fa fa-magic"></i>&nbsp; ADD</button>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            <div class="table-responsive">
+                                                <table class="table table-top-campaign">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1. Australia</td>
+                                                            <td>$70,261.65</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2. United Kingdom</td>
+                                                            <td>$46,399.22</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3. Turkey</td>
+                                                            <td>$35,364.90</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5. France</td>
+                                                            <td>$10,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3. Turkey</td>
+                                                            <td>$35,364.90</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5. France</td>
+                                                            <td>$10,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3. Turkey</td>
+                                                            <td>$35,364.90</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5. France</td>
+                                                            <td>$10,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!-- END DATA TABLE-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- DATA TABLE-->
+                                        <div class="top-campaign">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3 class="title-3 m-b-30">Sizes</h3>
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-end">
+                                                    <button class="btn btn-primary h-75" id="size_button_open" onclick="show_btn('size')">Add New</button>
+                                                    <button class="btn btn-warning h-75 d-none" id="size_button_close" onclick="close_btn('size')">close</button>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-5 d-none" id="size">
+                                                <div class="col-12">
+                                                    <div class="row form-group mb-5">
+                                                        <div class="col col-md-3">
+                                                            <label for="text-input" class=" form-control-label">Size Name</label>
+                                                        </div>
+                                                        <div class="col-12 col-md-9">
+                                                            <input type="text" id="text-input" name="text-input" placeholder="Name" class="form-control">
+                                                            <small class="form-text text-muted"></small>
+                                                        </div>
+                                                                        <button type="button" class="btn btn-outline-success w-100">
+                                                <i class="fa fa-magic"></i>&nbsp; ADD</button>
+                                            </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         
+                                        
+                                            <div class="table-responsive">
+                                                <table class="table table-top-campaign">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1. Australia</td>
+                                                            <td>$70,261.65</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2. United Kingdom</td>
+                                                            <td>$46,399.22</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3. Turkey</td>
+                                                            <td>$35,364.90</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5. France</td>
+                                                            <td>$10,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3. Turkey</td>
+                                                            <td>$35,364.90</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5. France</td>
+                                                            <td>$10,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3. Turkey</td>
+                                                            <td>$35,364.90</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5. France</td>
+                                                            <td>$10,366.96</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4. Germany</td>
+                                                            <td>$20,366.96</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!-- END DATA TABLE-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="copyright">
+                                            <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- END PAGE CONTENT  -->
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="../vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="../vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="../vendor/slick/slick.min.js">
+    </script>
+    <script src="../vendor/wow/wow.min.js"></script>
+    <script src="../vendor/animsition/animsition.min.js"></script>
+    <script src="../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="../vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="../vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="../vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="../js/main.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

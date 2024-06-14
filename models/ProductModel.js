@@ -15,6 +15,9 @@ const productsSchema = new Schema({
     quantity: {
         type: Number,
     },
+    gender:{
+        type: String,
+    },
     category: {
         type: String,
     },

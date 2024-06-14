@@ -35,7 +35,73 @@
     <link href="../css/theme.css" rel="stylesheet" media="all">
 
 </head>
+<script>
 
+
+    function close_btn(name)
+    {
+        if(name == undefined)
+        {
+            
+        }
+        else if(name == "category")
+        {
+            document.getElementById("category").classList.add("d-none");
+            document.getElementById("category").classList.remove("d-block");
+
+            document.getElementById("category_button_close").classList.add("d-none");
+            document.getElementById("category_button_close").classList.remove("d-block");
+
+            document.getElementById("category_button_open").classList.remove("d-none");
+            document.getElementById("category_button_open").classList.add("d-block");
+        }
+        else if(name == "size")
+        {
+            document.getElementById("size").classList.add("d-none");
+            document.getElementById("size").classList.remove("d-block");
+
+            document.getElementById("size_button_close").classList.add("d-none");
+            document.getElementById("size_button_close").classList.remove("d-block");
+
+            document.getElementById("size_button_open").classList.remove("d-none");
+            document.getElementById("size_button_open").classList.add("d-block");
+        }
+    }
+
+
+    function show_btn(name)
+    {
+        if(name == undefined)
+        {
+            
+        }
+        else if(name == "category")
+        {
+            document.getElementById("category").classList.remove("d-none");
+            document.getElementById("category").classList.add("d-block");
+
+            document.getElementById("category_button_close").classList.remove("d-none");
+            document.getElementById("category_button_close").classList.add("d-block");
+
+            document.getElementById("category_button_open").classList.add("d-none");
+            document.getElementById("category_button_open").classList.remove("d-block");
+        }
+        else if(name == "size")
+        {
+            document.getElementById("size").classList.remove("d-none");
+            document.getElementById("size").classList.add("d-block");
+
+            document.getElementById("size_button_close").classList.remove("d-none");
+            document.getElementById("size_button_close").classList.add("d-block");
+
+            document.getElementById("size_button_open").classList.add("d-none");
+            document.getElementById("size_button_open").classList.remove("d-block");
+        }
+    }
+
+
+
+</script>
 <body class="animsition">
     <div class="page-wrapper">
         <%- include("partials/admin_header") %>
@@ -78,10 +144,11 @@
                                                         <h3 class="title-3 m-b-30">Categories</h3>
                                                     </div>
                                                     <div class="col-6 d-flex justify-content-end">
-                                                        <a href="" class="btn btn-primary h-75">Add New</a>
+                                                        <button class="btn btn-primary h-75" id="category_button_open" onclick="show_btn('category')">Add New</button>
+                                                        <button class="btn btn-warning h-75 d-none" id="category_button_close" onclick="close_btn('category')">close</button>
                                                     </div>
                                                 </div>
-                                                <div class="row mt-5">
+                                                <div class="row mt-5 d-none" id="category">
                                                     <div class="col-12">
                                                         <div class="row form-group mb-5">
                                                             <div class="col col-md-3">
@@ -91,6 +158,9 @@
                                                                 <input type="text" id="text-input" name="text-input" placeholder="Name" class="form-control">
                                                                 <small class="form-text text-muted"></small>
                                                             </div>
+                                                            <button type="button" class="btn btn-outline-success w-100">
+                                                                <i class="fa fa-magic"></i>&nbsp; ADD</button>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,10 +230,26 @@
                                                     <h3 class="title-3 m-b-30">Sizes</h3>
                                                 </div>
                                                 <div class="col-6 d-flex justify-content-end">
-                                                    <a href="" class="btn btn-primary h-75">Add New</a>
+                                                    <button class="btn btn-primary h-75" id="size_button_open" onclick="show_btn('size')">Add New</button>
+                                                    <button class="btn btn-warning h-75 d-none" id="size_button_close" onclick="close_btn('size')">close</button>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="row mt-5 d-none" id="size">
+                                                <div class="col-12">
+                                                    <div class="row form-group mb-5">
+                                                        <div class="col col-md-3">
+                                                            <label for="text-input" class=" form-control-label">Size Name</label>
+                                                        </div>
+                                                        <div class="col-12 col-md-9">
+                                                            <input type="text" id="text-input" name="text-input" placeholder="Name" class="form-control">
+                                                            <small class="form-text text-muted"></small>
+                                                        </div>
+                                                                        <button type="button" class="btn btn-outline-success w-100">
+                                                <i class="fa fa-magic"></i>&nbsp; ADD</button>
+                                            </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                          
                                         
                                             <div class="table-responsive">

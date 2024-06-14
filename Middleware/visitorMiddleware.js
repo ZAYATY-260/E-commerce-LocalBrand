@@ -1,30 +1,58 @@
-const Visitor = require('../models/VisitorModel'); // Assuming you have a Visitor model defined
+// visitorLogger.js
 const getIpAddress = require('../Functions/ipUtils');
+const fs = require('fs').promises;
+const path = require('path');
 
-const visitorMiddleware = async (req, res, next) => {
-  
-  const ipAddress = getIpAddress(req);
-  
-  
-  try {
-    // Check if this IP address has already visited the website
-    let visitor = await Visitor.findOne({ ipAddress });
-
-    if (!visitor) {
-      // If the IP address is not found in the database, create a new entry
-      visitor = new Visitor({ ipAddress, count: 1 });
-    } else {
-      // If the IP address is found, increment the count
-      visitor.count += 1;
+const ensureDirectoryExists = async (filePath) => {
+    const dirname = path.dirname(filePath);
+    try {
+        await fs.mkdir(dirname, { recursive: true });
+    } catch (err) {
+        if (err.code !== 'EEXIST') {
+            throw err;
+        }
     }
-
-    // Save the updated visitor information to the database
-    await visitor.save();
-
-  } catch (err) {
-    console.error("Error updating visitor count:", err);
-    next(err);
-  }
 };
 
-module.exports = { visitorMiddleware };
+const readLogsFromFile = async (logFile) => {
+    try {
+        const data = await fs.readFile(logFile, 'utf8');
+        return JSON.parse(data) || [];
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            return [];
+        }
+        throw err;
+    }
+};
+
+const writeLogsToFile = async (logFile, logs) => {
+    await fs.writeFile(logFile, JSON.stringify(logs, null, 2), 'utf8');
+};
+
+const logVisitor = async (req) => {
+    const ipAddress = getIpAddress(req);
+    const logFile = path.join(__dirname, '../logs/visitorLogs.json');
+
+    try {
+        await ensureDirectoryExists(logFile);
+
+        let logs = await readLogsFromFile(logFile);
+
+        let visitor = logs.find(log => log.ipAddress === ipAddress);
+
+        if (!visitor) {
+            visitor = { ipAddress, count: 1 };
+            logs.push(visitor);
+        } else {
+            visitor.count += 1;
+        }
+
+        await writeLogsToFile(logFile, logs);
+    } catch (err) {
+        console.error("Error updating visitor count:", err);
+        throw err; // Throw error to be caught by the caller
+    }
+};
+
+module.exports = { logVisitor };

@@ -1,5 +1,5 @@
 const product = require("../models/ProductModel.js");
-const {visitorMiddleware} = require("../Middleware/visitorMiddleware.js");
+const {logVisitor} = require("../Middleware/visitorMiddleware.js");
 
   // Get products by date
  
@@ -12,7 +12,7 @@ const get_product_index = async (req, res, next) =>
   try {
     const products = await product.find();
     //take the ip address for the user to save in db
-    visitorMiddleware(req,res,next);
+    logVisitor(req,res);
     res.render('shop', { product_client: products , isEmpty: products.length > 0 ? false : true });
   } catch (err) {
     console.error(err);

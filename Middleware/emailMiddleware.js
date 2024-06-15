@@ -8,7 +8,7 @@ const mailing = async (req) => {
       pass: process.env.USER_PASS
     }
   });
-  
+//   const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(req.body.email)}`;  will be used when we deploy the website
   const verificationLink = `http://localhost:27017/confirmTracking?email=${encodeURIComponent(req.body.email)}`;
   const mail_option = {
     from: "mohammad2109652@miuegypt.edu.eg",

@@ -254,3 +254,52 @@ header .logo {
   font-size: 1.1em;
   text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff;
 }
+.showcase {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.showcase video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.showcase .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.container.navigation {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 150px; /* Adjust size as needed */
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 10px 0;
+  display: block;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

@@ -1,4 +1,7 @@
+const { mailing } = require("../Middleware/emailMiddleware.js");
 const Subscriber = require("../models/SubsModel");
+
+
 
 const verifyEmail = async (req, res, next) => {
   try {
@@ -6,19 +9,20 @@ const verifyEmail = async (req, res, next) => {
     if (!email) {
       return res.status(400).send("Invalid request");
     }
+
     
-    // Find the subscriber and update verified status
     const subscriber = await Subscriber.findOneAndUpdate(
       { email: email },
       { verified: true },
       { new: true }
     );
-    
+
     if (!subscriber) {
       return res.status(404).send("Subscriber not found");
     }
+
     
-    res.send("Email verified successfully!");
+    res.render('confirmTracking');
   } catch (err) {
     console.error(err);
     next(err);

@@ -4,15 +4,29 @@ const Subscriber = require("../models/SubsModel");
 const sendverification = async (req, res, next) => {
   try {
     const email = req.body.email;
-    // Save email to MongoDB with verified: false
+
+    
+    const existingSubscriber = await Subscriber.findOne({ email: email });
+
+    if (existingSubscriber) {
+      
+      res.redirect("/tracking?emailExists=true");
+      return;
+    }
+
+    
     const newSubscriber = new Subscriber({ email: email, verified: false });
     await newSubscriber.save();
-    
-    await mailing(req); // Assuming mailing function is asynchronous
+
+    await mailing(req, res); 
     res.redirect("/tracking?emailSent=true");
   } catch (err) {
-    console.error(err);
-    next(err);
+    if (err.code === 11000) { 
+      res.redirect("/tracking?emailExists=true");
+    } else {
+      console.error(err);
+      next(err);
+    }
   }
 };
 

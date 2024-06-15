@@ -24,7 +24,7 @@ router.get('/tracking', (req, res) => {
 });
 
 router.post('/sendverification', sendverification);
-router.get('/verify', verifyEmail);
+router.get('/confirmTracking', verifyEmail);
 
 router.get('/confirmTracking', (req, res) => {
     res.render('confirmTracking');

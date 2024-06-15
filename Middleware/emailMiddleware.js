@@ -9,8 +9,7 @@ const mailing = async (req) => {
     }
   });
   
-  const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(req.body.email)}`;
-  
+  const verificationLink = `http://localhost:27017/confirmTracking?email=${encodeURIComponent(req.body.email)}`;
   const mail_option = {
     from: "mohammad2109652@miuegypt.edu.eg",
     to: req.body.email,

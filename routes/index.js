@@ -1,6 +1,7 @@
 const express = require("express");
 const {get_product_index} = require("../Controllers/productController.js");
 const {sendverification} = require("../Controllers/subController.js");
+const { verifyEmail } = require("../Controllers/verifyController");
 const router = express.Router();
 
 
@@ -23,6 +24,7 @@ router.get('/tracking', (req, res) => {
 });
 
 router.post('/sendverification', sendverification);
+router.get('/verify', verifyEmail);
 
 router.get('/confirmTracking', (req, res) => {
     res.render('confirmTracking');

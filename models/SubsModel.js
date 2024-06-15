@@ -1,11 +1,18 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
 
-const Subschema = new   Schema({
-    email:String
-      
+const subscriberSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  verified: {
+    type: Boolean,
+    required: true,
+    default: false
+  }
 });
 
-const Subscribers = mongoose.model('Subscribers', Subschema);
+const Subscriber = mongoose.model('Subscriber', subscriberSchema);
 
-module.exports = Subscribers;
+module.exports = Subscriber;

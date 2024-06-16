@@ -1,41 +1,51 @@
+// admin.js
+
 const express = require("express");
-
-const {check_category , add_category , view_utilities} = require("../Controllers/utilitycontroller");
-const {checkAdmin} = require("../Controllers/adminController.js");
-
 const router = express.Router();
+const { check_category, add_category, view_utilities } = require("../Controllers/utilitycontroller");
+const { checkAdmin } = require("../Controllers/adminController.js");
+const { verifyToken } = require("../Middleware/tokenMiddleware.js");
 
+// Render login page
 router.get('/', (req, res) => {
     res.render('Admin/Login');
 });
 
+// Handle admin login
 router.post('/checkAdmin', checkAdmin);
-router.get('/dashboard',(req, res) => {
+
+// Dashboard route requiring authentication
+router.get('/dashboard', verifyToken, (req, res) => {
     res.render('Admin/Dashboard');
 });
 
+// Forgotten password route
 router.get('/forgetpassword', (req, res) => {
     res.render('Admin/Forgetpass');
 });
 
-router.get('/add_product', (req, res) => {
+// Add product route
+router.get('/add_product', verifyToken, (req, res) => {
     res.render('Admin/add_product');
 });
 
-router.get('/view_products', (req, res) => {
+// View products route
+router.get('/view_products', verifyToken, (req, res) => {
     res.render('Admin/View_products');
 });
 
-router.get('/utilities', (req, res) => {
-    res.render('Admin/utilities',{message: ""});
+// Utilities route
+router.get('/utilities', verifyToken, (req, res) => {
+    res.render('Admin/utilities', { message: "" });
 });
 
-router.get('/check_category/:category', check_category);
+// Check category route
+router.get('/check_category/:category', verifyToken, check_category);
 
-router.post('/add_category', add_category);
+// Add category route
+router.post('/add_category', verifyToken, add_category);
 
-router.get('/view_utilities', view_utilities);
+// View utilities route
+router.get('/view_utilities', verifyToken, view_utilities);
 
 module.exports = router;
-
-

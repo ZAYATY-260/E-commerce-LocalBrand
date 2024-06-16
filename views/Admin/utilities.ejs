@@ -11,7 +11,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard 4</title>
+    <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
     <link href="../css/font-face.css" rel="stylesheet" media="all">
@@ -37,6 +37,212 @@
 </head>
 <script>
 
+    function generateBreadcrumb() {
+        const breadcrumbElement = document.getElementById('breadcrumb');
+        const urlPath = window.location.pathname;
+        const pathSegments = urlPath.split('/').filter(segment => segment);
+    
+        let breadcrumbHTML = 'You are here: <a href="/">Home</a>';
+    
+        let path = '';
+        pathSegments.forEach((segment, index) => {
+            path += `/${segment}`;
+            const segmentName = decodeURIComponent(segment.replace(/-/g, ' '));
+            if (index === pathSegments.length - 1) {
+                breadcrumbHTML += ` / ${segmentName}`;
+            } else {
+                breadcrumbHTML += ` / <a href="">${segmentName}</a>`;
+            }
+        });
+    
+        breadcrumbElement.innerHTML = breadcrumbHTML;
+    }
+
+    function fetchCategories() {
+        fetch('/admin/view_utilities')
+            .then(response => response.json())
+            .then(data => {
+                displayCategories(data.Categories);
+            })
+            .catch(error => 
+            {
+                console.error('Error fetching categories:', error);
+            });
+    }
+    
+    function displayCategories(categories) {
+        const tableBody = document.querySelector('#category-table tbody');
+        tableBody.innerHTML = '';
+    
+        categories.forEach(category => {
+            const row = document.createElement('tr');
+    
+            const idCell = document.createElement('td');
+            idCell.textContent = category.Name;
+            row.appendChild(idCell);
+    
+            const nameCell = document.createElement('td');
+            nameCell.textContent = category.ID;
+            row.appendChild(nameCell);
+    
+            tableBody.appendChild(row);
+        });
+    }
+    
+
+   // Function to handle form submission and display messages
+function handleFormSubmitCategory(formSelector, messageDivId) {
+    const form = document.querySelector(formSelector);
+    const messageDiv = document.getElementById(messageDivId);
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const categoryName = form.querySelector('input[name="category_name"]').value.trim();
+        if (!categoryName) {
+            showMessage('Category name is required.', 'danger');
+            return;
+        }
+
+        fetch('/admin/add_category', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ category_name: categoryName }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.color == "success") {
+                showMessage(data.message, 'success');
+                // Clear input field
+                form.querySelector('input[id="category_name"]').value = '';
+            } else {
+                showMessage(data.message, 'danger');
+            }
+            fetchCategories();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showMessage('Request failed. Please try again.', 'danger');
+        });
+    });
+
+    function showMessage(message, color) {
+        messageDiv.innerHTML = `<div class="alert au-alert-${color} alert-dismissible fade show au-alert au-alert--70per" role="alert">
+
+            <i class="zmdi zmdi-${color == 'success' ? 'check-circle' : 'close-circle'}"></i>
+
+            <span class="content">${message}</span>
+            <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="zmdi zmdi-close-circle"></i>
+                </span>
+            </button>
+        </div>`;
+    }
+}
+
+
+function handleFormSubmitCategory(formSelector, messageDivId) {
+    const form = document.querySelector(formSelector);
+    const messageDiv = document.getElementById(messageDivId);
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const categoryName = form.querySelector('input[name="category_name"]').value.trim();
+        if (!categoryName) {
+            showMessage('Category name is required.', 'danger');
+            return;
+        }
+
+        fetch('/admin/add_category', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ category_name: categoryName }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.color == "success") {
+                showMessage(data.message, 'success');
+                // Clear input field
+                form.querySelector('input[id="category_name"]').value = '';
+            } else {
+                showMessage(data.message, 'danger');
+            }
+            fetchCategories();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showMessage('Request failed. Please try again.', 'danger');
+        });
+    });
+
+    function showMessage(message, color) {
+        messageDiv.innerHTML = `<div class="alert au-alert-${color} alert-dismissible fade show au-alert au-alert--70per" role="alert">
+
+            <i class="zmdi zmdi-${color == 'success' ? 'check-circle' : 'close-circle'}"></i>
+
+            <span class="content">${message}</span>
+            <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="zmdi zmdi-close-circle"></i>
+                </span>
+            </button>
+        </div>`;
+    }
+}
+
+
+function addUserKeyupListener(inputId, resultId) {
+            const inputElement = document.getElementById(inputId);
+            const resultElement = document.getElementById(resultId);
+            const buttonElement = document.getElementById("add_category_button");
+
+            inputElement.addEventListener('keyup', function(event) {
+                const category = inputElement.value;
+                if (category.length > 0) {
+                    fetch(`/admin/check_category/${category}`)
+                        .then(response => response.json())
+                        .then(data => {
+                   
+                            if(data.color == "success")
+                            {
+                                resultElement.classList.add('text-success');
+                                resultElement.classList.remove('text-danger');
+                                buttonElement.disabled = false; 
+                                buttonElement.classList.remove('btn-outline-danger');
+                                buttonElement.classList.add('btn-outline-success');
+                            }
+                            else if(data.color == "danger")
+                            {
+                                resultElement.classList.add('text-danger');
+                                resultElement.classList.remove('text-success');
+                                buttonElement.disabled = true; 
+                                buttonElement.classList.add('btn-outline-danger');
+                                buttonElement.classList.remove('btn-outline-success');
+                            }
+                            resultElement.innerText = data.message;
+                        })
+                        .catch(error => {
+                            resultElement.innerText = 'Error: ' + error.message;
+                        });
+                } else {
+                    resultElement.innerText = '';
+                }
+            });
+        }
+
+document.addEventListener('DOMContentLoaded', function() 
+{
+        generateBreadcrumb();
+        fetchCategories();
+        addUserKeyupListener('category_name', 'result1');
+        handleFormSubmitCategory('#category_form', 'message');   
+});
 
     function close_btn(name)
     {
@@ -112,17 +318,9 @@
         <div class="page-container3">
             <section class="alert-wrap p-t-70 p-b-70">
                 <div class="container">
-                    <!-- ALERT-->
-                    <div class="alert au-alert-success alert-dismissible fade show au-alert au-alert--70per" role="alert">
-                        <i class="zmdi zmdi-check-circle"></i>
-                        <span class="content">You successfully read this important alert message.</span>
-                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">
-                                <i class="zmdi zmdi-close-circle"></i>
-                            </span>
-                        </button>
+                    <div id="message">
+
                     </div>
-                    <!-- END ALERT-->
                 </div>
             </section>
             <section>
@@ -151,74 +349,37 @@
                                                 <div class="row mt-5 d-none" id="category">
                                                     <div class="col-12">
                                                         <div class="row form-group mb-5">
+                                                           
                                                             <div class="col col-md-3">
                                                                 <label for="text-input" class=" form-control-label">Category Name</label>
                                                             </div>
                                                             <div class="col-12 col-md-9">
-                                                                <input type="text" id="text-input" name="text-input" placeholder="Name" class="form-control">
+                                                                <form id="category_form">
+                                                                <input type="text" id="category_name" name="category_name" placeholder="Name" class="form-control" required>
                                                                 <small class="form-text text-muted"></small>
+
+                                                                
+                                                                <div class="col-12 mb-2 mt-2">
+                                                                    <p class="text-center" id="result1"></p>
+                                                                </div>
+                                                                <button type="submit"  class="btn btn-outline-success w-100" id="add_category_button">
+                                                                    <i class="fa fa-magic"></i>&nbsp; ADD</button>
+                                                                </button>
+                                                                </form>
                                                             </div>
-                                                            <button type="button" class="btn btn-outline-success w-100">
-                                                                <i class="fa fa-magic"></i>&nbsp; ADD</button>
-                                                            </button>
+
                                                         </div>
+                                                       
                                                     </div>
                                                 </div>
                                                 
-                                            <div class="table-responsive">
-                                                <table class="table table-top-campaign">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1. Australia</td>
-                                                            <td>$70,261.65</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2. United Kingdom</td>
-                                                            <td>$46,399.22</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3. Turkey</td>
-                                                            <td>$35,364.90</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4. Germany</td>
-                                                            <td>$20,366.96</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5. France</td>
-                                                            <td>$10,366.96</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3. Turkey</td>
-                                                            <td>$35,364.90</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4. Germany</td>
-                                                            <td>$20,366.96</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5. France</td>
-                                                            <td>$10,366.96</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3. Turkey</td>
-                                                            <td>$35,364.90</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4. Germany</td>
-                                                            <td>$20,366.96</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5. France</td>
-                                                            <td>$10,366.96</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4. Germany</td>
-                                                            <td>$20,366.96</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-top-campaign" id="category-table">
+                                                        <tbody>
+                                                           
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                         </div>
                                         <!-- END DATA TABLE-->
                                     </div>

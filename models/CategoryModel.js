@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const categorySchema = new Schema({
-    category: {
+    Name: {
         type: String,
     }
 }, { timestamps: true });

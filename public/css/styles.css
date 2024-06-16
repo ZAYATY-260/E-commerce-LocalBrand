@@ -296,10 +296,10 @@ header .logo {
   color: white;
   text-decoration: none;
   font-size: 20px;
-  margin: 10px 0;
+  margin: 2px 0;
   display: block;
 }
 
 .link:hover {
-  text-decoration: underline;
+
 }

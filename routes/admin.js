@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const {check_category , add_category , view_utilities} = require("../Controllers/utilitycontroller");
 
 
 router.get('/', (req, res) => {
@@ -24,8 +24,14 @@ router.get('/view_products', (req, res) => {
 });
 
 router.get('/utilities', (req, res) => {
-    res.render('Admin/utilities');
+    res.render('Admin/utilities',{message: ""});
 });
+
+router.get('/check_category/:category', check_category);
+
+router.post('/add_category', add_category);
+
+router.get('/view_utilities', view_utilities);
 
 module.exports = router;
 

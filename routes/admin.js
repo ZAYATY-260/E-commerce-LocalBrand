@@ -1,13 +1,16 @@
 const express = require("express");
-const router = express.Router();
-const {check_category , add_category , view_utilities} = require("../Controllers/utilitycontroller");
 
+const {check_category , add_category , view_utilities} = require("../Controllers/utilitycontroller");
+const {checkAdmin} = require("../Controllers/adminController.js");
+
+const router = express.Router();
 
 router.get('/', (req, res) => {
     res.render('Admin/Login');
 });
 
-router.get('/dashboard', (req, res) => {
+router.post('/checkAdmin', checkAdmin);
+router.get('/dashboard',(req, res) => {
     res.render('Admin/Dashboard');
 });
 

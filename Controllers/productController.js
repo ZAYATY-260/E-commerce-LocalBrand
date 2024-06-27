@@ -1,4 +1,5 @@
 const product = require("../models/ProductModel.js");
+const Category = require('../models/CategoryModel');
 const {logVisitor} = require("../Middleware/visitorMiddleware.js");
 
   // Get products by date
@@ -14,6 +15,20 @@ const get_product_index = async (req, res, next) =>
     //take the ip address for the user to save in db
     logVisitor(req,res);
     res.render('shop', { product_client: products , isEmpty: products.length > 0 ? false : true });
+  } catch (err) {
+    console.error(err);
+    next(err); 
+  }
+}
+
+
+const view_add_productpage = async (req,res,next) =>
+{
+  try {
+    const category = await Category.find();
+    
+
+    res.render ('Admin/add_product', { categories :category });
   } catch (err) {
     console.error(err);
     next(err); 
@@ -313,4 +328,4 @@ const get_product_index = async (req, res, next) =>
 // };
 
 
-module.exports = { get_product_index};
+module.exports = { get_product_index , view_add_productpage};

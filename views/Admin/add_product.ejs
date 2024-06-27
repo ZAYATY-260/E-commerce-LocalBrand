@@ -98,17 +98,24 @@
                                             </div>
                                             <div class="row form-group mb-5">
                                                 <div class="col col-md-3">
-                                                    <label for="select" class=" form-control-label">Category</label>
+                                                  <label for="select" class="form-control-label">Category</label>
                                                 </div>
+                                                <% if(categories.length> 0){ %>
                                                 <div class="col-12 col-md-9">
                                                     <select name="select" id="select" class="form-control">
                                                         <option value="0">Please select</option>
-                                                        <option value="1">Option #1</option>
-                                                        <option value="2">Option #2</option>
-                                                        <option value="3">Option #3</option>
-                                                    </select>
+                                                       
+                                                        <% categories.forEach(function(category) { %>
+                                                          <option value="<%= category._id %>"><%= category.Name %></option>
+                                                        <% }); %>
+                
+                                                      </select>
                                                 </div>
-                                            </div>
+                                                <%}else {%>
+                                                    <p>No Data</p>
+                                                    <%}%>
+                                              </div>
+                                              
                                             <div class="row form-group mb-5">
                                                 <div class="col col-md-3">
                                                     <label class=" form-control-label">Available Sizes</label>

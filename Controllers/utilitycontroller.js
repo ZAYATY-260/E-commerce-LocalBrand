@@ -1,4 +1,5 @@
 const Category = require('../models/CategoryModel');
+const Sizes = require('../models/SizeModel');
 
 const check_category = async (req, res, next) => {
     const categoryName = req.params.category;
@@ -53,9 +54,9 @@ const view_utilities = async (req, res,next) =>
 {
     try
     {
-        const Categories = await Category.find();
-
-        return res.status(409).json({Categories: Categories});
+        const category= await Category.find();
+     
+        return res.status(409).json({Categories: category });
     }
     catch (error) 
     {

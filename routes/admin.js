@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const { check_category, add_category, view_utilities } = require("../Controllers/utilitycontroller");
+const { view_add_productpage } = require("../Controllers/productController");
 const { checkAdmin } = require("../Controllers/adminController.js");
 const { verifyToken } = require("../Middleware/tokenMiddleware.js");
 
@@ -25,9 +26,7 @@ router.get('/forgetpassword', (req, res) => {
 });
 
 // Add product route
-router.get('/add_product', verifyToken, (req, res) => {
-    res.render('Admin/add_product');
-});
+router.get('/add_product', verifyToken, view_add_productpage );
 
 // View products route
 router.get('/view_products', verifyToken, (req, res) => {

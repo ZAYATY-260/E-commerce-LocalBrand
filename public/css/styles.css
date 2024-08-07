@@ -9,9 +9,7 @@
 }
 
 body, html {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+
 }
 
 header {
@@ -42,7 +40,10 @@ header .logo {
   background-position: center;
   cursor: pointer;
 }
-
+.card{
+  background-color: transparent !important;
+  
+}
 .toggle.active {
   background: url(https://i.ibb.co/rt3HybH/close.png);
   background-repeat: no-repeat;
@@ -54,10 +55,7 @@ header .logo {
 .showcase {
   position: relative;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: max-content;
   background: #111;
   z-index: 1;
 }
@@ -68,7 +66,6 @@ header .logo {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   z-index: -1;
   opacity: 0.8;
 }
@@ -202,7 +199,7 @@ header .logo {
 }
 
 .navigation {
-  margin-top: 300px;
+  margin-top: 100px;
 }
 
 .link {
@@ -257,7 +254,7 @@ header .logo {
 .showcase {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 

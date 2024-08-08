@@ -9,7 +9,7 @@
 }
 
 body, html {
-
+    
 }
 
 header {
@@ -52,23 +52,7 @@ header .logo {
   cursor: pointer;
 }
 
-.showcase {
-  position: relative;
-  width: 100%;
-  height: max-content;
-  background: #111;
-  z-index: 1;
-}
 
-.showcase video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.8;
-}
 
 .showcase .content {
   position: relative;
@@ -255,7 +239,7 @@ header .logo {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .showcase video {

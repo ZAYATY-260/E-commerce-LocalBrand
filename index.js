@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const compression = require('compression');
 const bodyParser = require('body-parser');
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const ffmpeg = require("fluent-ffmpeg");
 const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+const rateLimit = require('express-rate-limit');
 require('dotenv').config(); // Load dotenv
 
 
@@ -16,10 +18,18 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+});
 
-app.set('trust proxy', true); // Trust the first proxy
+
+
+
 // Middleware
+app.use(compression());
 app.use(express.json());
+app.use(limiter);
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
@@ -38,6 +48,10 @@ app.use("/admin", adminRouter);
 
 // MongoDB connection URI
 const mongoURI =  process.env.dbURI ;
+
+
+
+
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, {

@@ -19,6 +19,11 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+router.get('/view', (req, res) => {
+    res.render('view_single_product');
+});
+
+
 router.get('/tracking', (req, res) => {
     res.render('tracking');
 });
